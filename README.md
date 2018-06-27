@@ -86,3 +86,46 @@ gridNew = [ [8, 4, 8, 7],
         return sum(min(i, j) for i in rows for j in cols) - sum(map(sum, grid))
  ```  
  Time complexity: **O(n\*n)**
+   
+## 804. Unique Morse Code Words [(link)](https://leetcode.com/problems/unique-morse-code-words/description/)  
+International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows: "a" maps to ".-", "b" maps to "-...", "c" maps to "-.-.", and so on.
+
+For convenience, the full table for the 26 letters of the English alphabet is given below:  
+[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]  
+Now, given a list of words, each word can be written as a concatenation of the Morse code of each letter. For example, "cab" can be written as "-.-.-....-", (which is the concatenation "-.-." + "-..." + ".-"). We'll call such a concatenation, the transformation of a word.
+
+Return the number of different transformations among all words we have.
+
+>Example:
+Input: words = ["gin", "zen", "gig", "msg"]
+Output: 2
+Explanation: 
+The transformation of each word is:
+"gin" -> "--...-."
+"zen" -> "--...-."
+"gig" -> "--...--."
+"msg" -> "--...--."
+There are 2 different transformations, "--...-." and "--...--.".
+  
+## Analysis
+Use ```dict``` in python to construct the lookup table from letter to Morse code  
+Find the corresponding Morse code for each words, and put them in ```set```  
+Return the length of the ``set``` we got.  
+## Solution
+```
+class Solution:
+    def uniqueMorseRepresentations(self, words):
+        """
+        :type words: List[str]
+        :rtype: int
+        """
+        #construct the dict 
+        table = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+        alph = 'abcdefghijklmnopqrstuvwxyz'
+        alph_table = {}
+        #compute codes
+        for i in range(len(alph)):
+            alph_table[alph[i]] = table[i]
+        codes = [''.join([alph_table[letter] for letter in word]) for word in words]
+        return len(set(codes))
+```
