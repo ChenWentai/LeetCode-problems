@@ -97,14 +97,14 @@ Now, given a list of words, each word can be written as a concatenation of the M
 Return the number of different transformations among all words we have.
 
 >Example:
-Input: words = ["gin", "zen", "gig", "msg"]
-Output: 2
-Explanation: 
-The transformation of each word is:
-"gin" -> "--...-."
-"zen" -> "--...-."
-"gig" -> "--...--."
-"msg" -> "--...--."
+Input: words = ["gin", "zen", "gig", "msg"]  
+Output: 2  
+Explanation:   
+The transformation of each word is:  
+"gin" -> "--...-."  
+"zen" -> "--...-."  
+"gig" -> "--...--."  
+"msg" -> "--...--."  
 There are 2 different transformations, "--...-." and "--...--.".
   
 ## Analysis
@@ -129,3 +129,5 @@ class Solution:
         codes = [''.join([alph_table[letter] for letter in word]) for word in words]
         return len(set(codes))
 ```
+Time complexity: **O(S)**, where S is the sum of length of word in ```words```
+Space complexity: **O(S)**
