@@ -74,7 +74,7 @@ gridNew = [ [8, 4, 8, 7],
  In the first traverse, compute ```row``` and ```col```.  
  In the second traverse, set the value of ```newGrid``` based on ```row``` and ```col```.  
  Finally calculate the difference.  
- ### Solution
+ ### Solution: [reference](https://leetcode.com/problems/max-increase-to-keep-city-skyline/discuss/120681/Easy-and-Concise-Solution-C++JavaPython)
  ```
  class Solution:
     def maxIncreaseKeepingSkyline(self, grid):
