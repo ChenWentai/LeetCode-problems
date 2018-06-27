@@ -129,5 +129,5 @@ class Solution:
         codes = [''.join([alph_table[letter] for letter in word]) for word in words]
         return len(set(codes))
 ```
-Time complexity: **O(S)**, where S is the sum of length of word in ```words```
+Time complexity: **O(S)**, where S is the sum of length of word in ```words```  
 Space complexity: **O(S)**
