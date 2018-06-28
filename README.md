@@ -142,4 +142,37 @@ Construct the maximum tree by the given array and output the root node of this t
 >Example: 
 Input: [3,2,1,6,0,5]  
 Output: return the tree root node representing the following tree:  
-  ![Alt text](https://github.com/ChenWentai/LeetCode-problems/blob/master/images/BinaryTree.PNG "Title")
+  ![Alt text](https://github.com/ChenWentai/LeetCode-problems/blob/master/images/BinaryTree.PNG)  
+    
+## Analysis
+Given a list ```nums```, use the maximum value as the root node, and the left/right sub-array as the left/right sub-tree. Then do the same operation on the left/right sub-array until all the elements in ```nums``` are added to the tree.  
+To solve the problem, we first need to define a function ```find_rot(nodes)```. Given a list ```nodes```, return the root and left/right sub-trees. In the function a recursion structure is necessary to traverse all the elements in ```nums```.  
+## Solution  
+```
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def constructMaximumBinaryTree(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
+        def find_root(nodes):
+            if not nodes:
+                return None
+            root = TreeNode(max(nodes))
+            idx = nodes.index(root.val)
+            l = nodes[0:idx]
+            r = nodes[idx+1:len(nodes)]     
+            root.left =find_root(l)
+            root.right = find_root(r)
+            return root
+        return find_root(nums)
+```
+
+
