@@ -110,7 +110,7 @@ There are 2 different transformations, "--...-." and "--...--.".
 ## Analysis
 Use ```dict``` in python to construct the lookup table from letter to Morse code  
 Find the corresponding Morse code for each words, and put them in ```set```  
-Return the length of the ``set``` we got.  
+Return the length of the ```set``` we got.  
 ## Solution
 ```
 class Solution:
@@ -131,3 +131,15 @@ class Solution:
 ```
 Time complexity: **O(S)**, where S is the sum of length of word in ```words```  
 Space complexity: **O(S)**
+
+## 654. Maximum Binary Tree  [original link](https://leetcode.com/problems/maximum-binary-tree/description/)
+Given an integer array with no duplicates. A maximum tree building on this array is defined as follow:  
+  
+1. The root is the maximum number in the array.  
+2. The left subtree is the maximum tree constructed from left part subarray divided by the maximum number.  
+3. The right subtree is the maximum tree constructed from right part subarray divided by the maximum number.  
+Construct the maximum tree by the given array and output the root node of this tree.  
+>Example: 
+Input: [3,2,1,6,0,5]  
+Output: return the tree root node representing the following tree:  
+  ![Alt text](https://github.com/ChenWentai/LeetCode-problems/blob/master/images/BinaryTree.PNG "Title")
