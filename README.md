@@ -190,7 +190,7 @@ Explanation: First reverse each row: [[0,1,1],[1,0,1],[0,0,0]].
 Then, invert the image: [[1,0,0],[0,1,0],[1,1,1]]  
   
 ## Analysis  
-This is a pretty easy question. The objective to post it here is to show how to use python's clear syntax to implement a "one-line" soution.  
+This is a pretty easy question. The objective to post it here is to show how to use python's simple syntax to implement a "one-line" soution.  
 ## Solution  
 ```
 class Solution(object):
