@@ -148,7 +148,7 @@ Output: return the tree root node representing the following tree:
 Given a list ```nums```, use the maximum value as the root node, and the left/right sub-array as the left/right sub-tree. Then do the same operation on the left/right sub-array until all the elements in ```nums``` are added to the tree.  
   
 To solve the problem, we first need to define a function ```find_rot(nodes)```. Given a list ```nodes```, return the root and left/right sub-trees. In the function a recursion structure is necessary to traverse all the elements in ```nums```.  
-## Solution  [reference](https://leetcode.com/problems/maximum-binary-tree/discuss/142430/My-Python-Solution:-how-do-you-think-about-it)
+## Solution  [(reference)](https://leetcode.com/problems/maximum-binary-tree/discuss/142430/My-Python-Solution:-how-do-you-think-about-it)
 ```
 # Definition for a binary tree node.
 # class TreeNode(object):
