@@ -87,7 +87,7 @@ gridNew = [ [8, 4, 8, 7],
  ```  
  Time complexity: **O(n\*n)**
    
-## 804. Unique Morse Code Words [(link)](https://leetcode.com/problems/unique-morse-code-words/description/)  
+## 804. Unique Morse Code Words [(original link)](https://leetcode.com/problems/unique-morse-code-words/description/)  
 International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows: "a" maps to ".-", "b" maps to "-...", "c" maps to "-.-.", and so on.
 
 For convenience, the full table for the 26 letters of the English alphabet is given below:  
@@ -132,7 +132,7 @@ class Solution:
 Time complexity: **O(S)**, where S is the sum of length of word in ```words```  
 Space complexity: **O(S)**
 
-## 654. Maximum Binary Tree  [original link](https://leetcode.com/problems/maximum-binary-tree/description/)
+## 654. Maximum Binary Tree  [(original link)](https://leetcode.com/problems/maximum-binary-tree/description/)
 Given an integer array with no duplicates. A maximum tree building on this array is defined as follow:  
   
 1. The root is the maximum number in the array.  
@@ -146,8 +146,9 @@ Output: return the tree root node representing the following tree:
     
 ## Analysis
 Given a list ```nums```, use the maximum value as the root node, and the left/right sub-array as the left/right sub-tree. Then do the same operation on the left/right sub-array until all the elements in ```nums``` are added to the tree.  
+  
 To solve the problem, we first need to define a function ```find_rot(nodes)```. Given a list ```nodes```, return the root and left/right sub-trees. In the function a recursion structure is necessary to traverse all the elements in ```nums```.  
-## Solution  
+## Solution  [reference](https://leetcode.com/problems/maximum-binary-tree/discuss/142430/My-Python-Solution:-how-do-you-think-about-it)
 ```
 # Definition for a binary tree node.
 # class TreeNode(object):
