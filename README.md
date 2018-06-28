@@ -170,7 +170,7 @@ class Solution(object):
             idx = nodes.index(root.val)
             l = nodes[0:idx]
             r = nodes[idx+1:len(nodes)]     
-            root.left =find_root(l)
+            root.left = find_root(l)
             root.right = find_root(r)
             return root
         return find_root(nums)
