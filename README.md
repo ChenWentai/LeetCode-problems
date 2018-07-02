@@ -214,7 +214,7 @@ Note:
 Input: x = 1, y = 4  
 Output: 2  
 Explanation:  
-1   (0 0 0 1)  
-4   (0 1 0 0)  
-&nbsp;&nbsp;↑   ↑  
+1 (0 0 0 1)  
+4 (0 1 0 0)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;↑   
 The above arrows point to positions where the corresponding bits are different  
