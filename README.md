@@ -242,7 +242,7 @@ class Solution(object):
                 result += 1 
         return result
 ```
-**Another tricky 1-line [answer](https://leetcode.com/problems/hamming-distance/discuss/143949/One-line-python-code)  **
+Another tricky 1-line [answer](https://leetcode.com/problems/hamming-distance/discuss/143949/One-line-python-code)   
 ```class Solution(object):
     def hammingDistance(self, x, y):
         """
