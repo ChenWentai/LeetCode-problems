@@ -251,4 +251,5 @@ Another tricky 1-line [answer](https://leetcode.com/problems/hamming-distance/di
         :rtype: int
         """
         return bin(x ^ y)[2:].count('1')
-        
+```  
+In this solution, we used python's bitwise XOR operator '^' to compute the the hamming distance between x and y.  
