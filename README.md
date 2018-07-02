@@ -203,7 +203,7 @@ class Solution(object):
             
 ```
   
-## 461. Hamming Distance  
+## 461. Hamming Distance [original link](https://leetcode.com/problems/hamming-distance/description/)  
 The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
 
 Given two integers **x** and **y**, calculate the Hamming distance.
@@ -217,4 +217,38 @@ Explanation:
 1 (0 0 0 1)  
 4 (0 1 0 0)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑&nbsp;&nbsp;&nbsp;&nbsp;↑   
-The above arrows point to positions where the corresponding bits are different  
+The above arrows point to positions where the corresponding bits are different   
+  
+## Solution  
+Here we will use the python built-in function ```bin```, which will convert an integer number to a binary string prefixed with “0b”.  
+```
+class Solution(object):
+    def hammingDistance(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+        """
+        dx = list(bin(x)[2:])
+        dy = list(bin(y)[2:])
+        while not len(dx) == len(dy):
+            if len(dx) < len(dy):
+                dx.insert(0,'0')
+            else:
+                dy.insert(0,'0')
+        result = 0
+        for i in range(len(dx)):
+            if dx[i]!= dy[i]:
+                result += 1 
+        return result
+```
+** Another tricky 1-line [answer](https://leetcode.com/problems/hamming-distance/discuss/143949/One-line-python-code)  
+```class Solution(object):
+    def hammingDistance(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+        """
+        return bin(x ^ y)[2:].count('1')
+        
