@@ -253,3 +253,62 @@ Another tricky 1-line [answer](https://leetcode.com/problems/hamming-distance/di
         return bin(x ^ y)[2:].count('1')
 ```  
 In this solution, we used python's bitwise XOR operator '^' to compute the the hamming distance between x and y.  
+  
+## 6. ZigZag Conversion [original link](https://leetcode.com/problems/zigzag-conversion/description/)  
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this:  
+P&emsp;A&emsp;H&emsp;N  
+A&thinsp;P&thinsp;L&thinsp;&thinsp;S&ensp;I&ensp;I&ensp;G  
+Y&emsp;I&emsp;&thinsp;&thinsp;R   
+  
+And then read line by line: "PAHNAPLSIIGYIR"  
+
+Write the code that will take a string and make this conversion given a number of rows:  
+
+`string convert(string s, int numRows);`  
+>Example 1:
+
+Input: s = "PAYPALISHIRING", numRows = 3
+Output: "PAHNAPLSIIGYIR"
+  
+## Solution 1: (My original method)Construct a 2-d array that stores all the characters. The "ZigZag" part will be stored  along with "".   
+```
+class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        if len(s) <= 2 or numRows==1:
+            return s
+        n = len(s)/(2*numRows-2) + 1
+        ZZ = []
+        k = 0
+        for i in range(n):
+            try:
+                ZZ.append([s[p] for p in range(k, k+numRows)])
+            except: 
+                temp = ['' for t in range(numRows)]
+                for p in range(0, len(s)-k):
+                    temp[p] = s[k+p]
+                T = temp[:]
+                ZZ.append(T)
+                break
+            for j in range(0,numRows-2):
+                temp = ['' for t in range(numRows)]
+                try:
+                    temp[numRows-j-2] = s[k+numRows+j]
+                    T = temp[:]
+                    ZZ.append(T)
+                except:
+                    break
+            k += numRows+numRows-2
+        
+        zz = [ZZ[i][j] for j in range(numRows) for i in range(len(ZZ))]
+        result = ''.join(zz)
+        return result    
+```
+Drawback: need to decide the numeber of the columns in advance; in each column we have to create a array with the same length, with a redundancy of ```numRows - 1``` characters.  
+##Solution 2: variable  lengths' 2-d array.
+to be updated...
+
