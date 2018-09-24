@@ -308,7 +308,28 @@ class Solution(object):
         result = ''.join(zz)
         return result    
 ```
-Drawback: need to decide the numeber of the columns in advance; in each column we have to create a array with the same length, with a redundancy of ```numRows - 1``` characters.  
-##Solution 2: variable  lengths' 2-d array.
-to be updated...
+Drawback: need to decide the numeber of the columns in advance; in each column we have to create a array with the same length, with a redundancy of ```numRows - 1``` characters of "".  
+## Solution 2: variable  lengths' 2-d array.
+```
+class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        if numRows == 1:
+            return s
+        s_zig = [[] for i in range(numRows)]
+        step = 1
+        idx = 0
+        for i in range(len(s)):
+            s_zig[idx].append(s[i])
+            if idx == 0:
+                step = 1
+            elif idx == numRows-1:
+                step = -1
+            idx += step
+        return ''.join([''.join(s_zig[i]) for i in range(numRows)])
+```
 
