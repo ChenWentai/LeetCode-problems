@@ -309,7 +309,8 @@ class Solution(object):
         return result    
 ```
 Drawback: need to decide the numeber of the columns in advance; in each column we have to create a array with the same length, with a redundancy of ```numRows - 1``` characters of "".  
-## Solution 2: variable  lengths' 2-d array.
+## Solution 2: variable  lengths' 2-d array.   
+In this solution, we introduce a `step` variable, which indicates the direction of Zig-Zag. `step = 1` while counting from top to bottom, and `step = -1` while counting from bottom to top. The difference with the previous method is that the 2d array is not a rectangular matrix. The length of each dimension is different, which avoid inserting many "" into the array.
 ```
 class Solution(object):
     def convert(self, s, numRows):
