@@ -334,7 +334,11 @@ class Solution(object):
         return ''.join([''.join(s_zig[i]) for i in range(numRows)])
 ```
   
-
+## 4. Median of two sorted arrays [(original link)](https://leetcode.com/problems/median-of-two-sorted-arrays/)  
+Here are two sorted arrays nums1 and nums2 of size m and n respectively.  
+Find the median of the two sorted arrays. The overall run time complexity should be **O(log (m+n))**.  
+You may assume nums1 and nums2 cannot be both empty.  
+  
 **Solution1: merge two arrays**  
 
 The most straightforward method we might come up with is to merge the two arrays and find the median of the merged arrays. Inspired by merge sort algorithm, we can easily write the `merge()` function to do this as follows:
@@ -377,7 +381,9 @@ This problem is actually a variation of **<<finding the kth smallest/largest ele
   
 Supposing `L` is the length of the merged array, so median is the `(L/2+1)`th  element(for odd number of elements) or the mean of `(L/2)`th and `(L/2+1)`th elements(for even number of elements).
   
-Let `k` = `L/2`, now the key is to find the `k`th element. We don't need to really merge the two arrays. Instead, we can compare the `k/2`th elements in both lists `nums1` and `nums2`. If the `k/2`th elements in `nums1` is smaller than in `nums2`, we know that the first `k/2` elements in `nums1` cannot be the median number and thus we remove them, as indicated in the figure below.![Image of Yaktocat](https://github.com/ChenWentai/LeetCode-problems/blob/master/images/problem4_MergeSortedArray.jpg)  
+Let `k` = `L/2`, now the key is to find the `k`th element. We don't need to really merge the two arrays. Instead, we can compare the `k/2`th elements in both lists `nums1` and `nums2`. If the `k/2`th elements in `nums1` is smaller than in `nums2`, we know that the first `k/2` elements in `nums1` cannot be the median number and thus we remove them, as indicated in the figure below.
+  
+![Image of Yaktocat](https://github.com/ChenWentai/LeetCode-problems/blob/master/images/problem4_MergeSortedArray.jpg)  
   
 In this example, `k = 7`, and the 3th element in `nums2` is smaller, so we remove the first 3 elements in `nums2` and started this process again. Next time `L = (14-3) = 11`  and `k = 1/2 = 5` so we just need to find the 5th element. Again `k/2 = 2` so we remove the first 2 elements in one array. This iteration continues untill `k == 1` or one of the array becomes empty, and the result(**median**) is the **0 th** element in the current two arrays(smaller one) or `k`th element in the only array(another array is empty). The code is shown below:  
 ```
