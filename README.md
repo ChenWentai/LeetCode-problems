@@ -347,3 +347,5 @@ The median is 2.0
 >Example 2:
 nums1 = [1, 2]
 nums2 = [3, 4]
+  
+![Image of Yaktocat](https://github.com/ChenWentai/LeetCode-problems/blob/master/images/problem4_MergeSortedArray.jpg)
