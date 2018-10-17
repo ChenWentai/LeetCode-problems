@@ -423,6 +423,104 @@ class Solution:
         k1 = (len(nums1) + len(nums2)+1) // 2
         k2 = (len(nums1) + len(nums2)+2) // 2
         return (getKth(nums1, nums2, k1) + getKth(nums1, nums2, k2))/2.0
-        ```
+```
 
+## 8. String to integer(atoi) [(original link)](https://leetcode.com/problems/string-to-integer-atoi/description/)  
+Implement atoi which converts a string to an integer.
+
+The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.
+
+The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
+
+If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.
+
+If no valid conversion could be performed, a zero value is returned.
+
+**Note**:
+
+Only the space character ' ' is considered as whitespace character.
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^31 − 1]. If the numerical value is out of the range of representable values, INT_MAX (231 − 1) or INT_MIN (−231) is returned.  
   
+**Solution 1: naive if & else**
+```
+class Solution:
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        if str == "":
+            return 0
+        result = ''
+        i = 0
+        flag = [1, -1]
+        sign = ['+', '-']
+        legal = [' ', '+', '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        legal_sign = [' ', '+', '-']
+        while len(str) > i:
+            # print("str[i]:",str[i])
+            if str[i] not in legal_sign and str[i] not in digit:
+                return 0
+            if str[i] == ' ':
+                i += 1
+                continue
+            if str[i] in sign:
+                if len(str[i:]) > 1 and str[i+1].isdigit():
+                    f = flag[sign.index(str[i])]
+                    str = str[i+1:]
+                    break
+                else:
+                    return 0
+            if str[i].isdigit():
+                # print("bingo!")
+                f = 1
+                str = str[i:]
+                break
+            i += 1
+        i = 0
+        while len(str) > i:
+            if str[i].isdigit():
+                result += str[i]
+            elif i == 0:
+                return 0
+            else:
+                break
+            i += 1
+        result = int(result)
+        result *= f
+        INT_MAX = pow(2, 31) - 1
+        INT_MIN = -pow(2, 31)
+        if result >= INT_MIN and result <= INT_MAX:
+            return result
+        else:
+            return (INT_MAX if f == 1 else INT_MIN)
+```
+**Solution 2: use try&except**
+This problem includes many exceptions which returns 0. We can put them together in ```except``` and return 0
+```
+class Solution:
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        s = str.strip()
+        r = ''
+        try:
+            for i in range(len(s)):
+                if (s[i] in '-+' and i == 0) or ('0' <= s[i] <= '9'):
+                    r += s[i]
+                else:
+                    break
+            r = int(r)
+            INT_MAX = pow(2,31)-1
+            INT_MIN = -pow(2,31)
+            if r > INT_MAX:
+                return INT_MAX
+            if r < INT_MIN:
+                return INT_MIN
+            return r
+        except:
+            return 0
+```
