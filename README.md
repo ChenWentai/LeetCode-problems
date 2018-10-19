@@ -524,3 +524,71 @@ class Solution:
         except:
             return 0
 ```
+## 10. Regular Expression Matching [(original link)](https://leetcode.com/problems/regular-expression-matching/)  
+
+Given an input string (`s`) and a pattern (`p`), implement regular expression matching with support for  `'.'`  and  `'*'`.
+
+'`.`' Matches any single character.
+'`*`' Matches zero or more of the preceding element.
+
+The matching should cover the  **entire**  input string (not partial).
+
+**Note:**
+
+-   `s` could be empty and contains only lowercase letters  `a-z`.
+-   `p`  could be empty and contains only lowercase letters  `a-z`, and characters like `.` or `*`.
+  
+**Solution 1: Python library`re.py`**
+There is an easy(almost cheating) solution using `re` library in python.
+
+```
+import re
+class Solution:
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        if re.fullmatch(p,s):
+	        return True
+	    else:
+		    return False
+```
+**Solution 2: Recursion**
+This problem involves many different cases. By using recursion, we will start from the first characters in `s` and `p`, recursively compare each character from the beginning to the end.  This code is  inspired by [华软小白](https://blog.csdn.net/chenhua1125/article/details/80471839)
+```
+class Solution:
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        #if p is empty, return true if s is empty or false if s is not empty
+        if p == "":
+	        return s == ""
+		#if p contains only one character, return true only if s contains the
+		#same single character of p is "."
+		if len(p) == 1:
+			return len(s) == 1 and (s[0] == p[0] or p[0] == ".")
+		#if the 2nd character in p is not "*":
+		if p[1]!= "*":
+		#false when s is empty
+			if s == "":
+				return False
+			#move to next character in both s and p
+			return (s[0] == p[0] or p[0] == ".") and self.isMatch(s[1:], p[1:])
+		#if the 2nd character in p is "*":
+		else:
+			while s and (s[0] == p[0] or p[0] == ".")
+			#since "*" can represent "repeat for 0 times", we try to match 
+			#s and p[2:]. If they match then original s and p also match
+				if self.isMatch(s,p[2:]):
+					return True
+			#if s and p[2:] don't match, then we skip s[0] because it already 
+			#matches p[0], and continue the loop
+				s = s[1:]
+		return self.isMatch(s,p[2:])
+```
+However, there is the problem of **TLE**(Time Limit Exceed) since the time complexity of recursion is **O(m*n)**. Instead, we can use dynamic programming to solve this problem.
