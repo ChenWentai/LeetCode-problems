@@ -592,3 +592,28 @@ class Solution:
 		return self.isMatch(s,p[2:])
 ```
 However, there is the problem of **TLE**(Time Limit Exceed) since the time complexity of recursion is **O(m*n)**. Instead, we can use dynamic programming to solve this problem.
+  
+## 11. Container With Most Water (Medium)[(original link)](https://leetcode.com/problems/container-with-most-water/)    
+Given  _n_  non-negative integers  _a1_,  _a2_, ...,  _an_ , where each represents a point at coordinate (_i_,  _ai_).  _n_  vertical lines are drawn such that the two endpoints of line  _i_  is at (_i_,  _ai_) and (_i_, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+
+**Note:** You may not slant the container and  _n_  is at least 2.
+**Solution:**
+Assuming we use `i`th and `j`th line as our containers. First we consider `i = 0` and `j = len(height)-1` since this is the widest container, and thus tend to have a larger volume. We compute the volume of this container by `res = (j-i) * min(height[i], height[j])` and store it to variable`res`. Then we remove the shorter line of `i` and `j`, until `j-i == 0`, and the maximum volume is `res`.  The time complexity is **O(n)**.
+```
+class Solution:
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        i,j = 0,len(height)-1
+        res = 0
+        while i <= j:
+            h = min(height[i], height[j])
+            res = max(res, (j - i) * h)
+            if height[i] >= height[j]:
+                j -= 1
+            else:
+                i += 1
+        return res 
+```
