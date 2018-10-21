@@ -36,6 +36,137 @@ Space complexity: **O(1)**
      f = set(J)     
      return sum([s in f for s in S])    
 ```
+
+## 11. Integer To Roman (Medium)[(original link)](https://leetcode.com/problems/container-with-most-water/)  
+
+
+
+Roman numerals are represented by seven different symbols: `I`,  `V`,  `X`,  `L`,  `C`,  `D`  and  `M`.
+
+**Symbol**       **Value**
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+
+For example, two is written as  `II` in Roman numeral, just two one's added together. Twelve is written as,  `XII`, which is simply  `X`  +  `II`. The number twenty seven is written as  `XXVII`, which is  `XX`  +  `V`  +  `II`.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not  `IIII`. Instead, the number four is written as  `IV`. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as  `IX`. There are six instances where subtraction is used:
+
+-   `I`  can be placed before  `V`  (5) and  `X`  (10) to make 4 and 9.
+-   `X`  can be placed before  `L`  (50) and  `C`  (100) to make 40 and 90.
+-   `C`  can be placed before  `D`  (500) and  `M`  (1000) to make 400 and 900.
+
+Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.
+**Solution 1 **: Since the input range is 1~3999, we can simply list all the possibilities. 
+```
+class Solution:
+    def intToRoman(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        M = ["", "M", "MM", "MMM"]
+        C = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
+        X = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
+        I = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+        return M[num//1000]+C[num%1000//100]+X[num%100//10]+I[num%10]
+```
+**Solution 2**: Another simple `if-else` solution is shown below. However this method is slower than the first one.
+```
+class Solution:
+    def intToRoman(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        ch = [['M',''],['C','D'],['X','L'],['I','V']]
+        res = []
+        bit = 0
+        for i in range(len(ch)-1,-1,-1):
+            num,bit = divmod(num,10)
+            if 1<=bit<=3:
+                res.insert(0,ch[i][0]*bit)
+            elif bit == 4:
+                res.insert(0,ch[i][0]+ch[i][1])
+            elif 5 <= bit <= 8:
+                res.insert(0,ch[i][1] + (bit-5)*ch[i][0])
+            elif bit == 9:
+                res.insert(0,ch[i][0]+ch[i-1][0])
+
+        return ''.join(res)
+```
+## 12. Roman To Integer (Easy)[(original link)](https://leetcode.com/problems/roman-to-integer/description/)  
+Roman numerals are represented by seven different symbols: `I`,  `V`,  `X`,  `L`,  `C`,  `D`  and  `M`.
+
+**Symbol**       **Value**
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+
+For example, two is written as  `II` in Roman numeral, just two one's added together. Twelve is written as,  `XII`, which is simply  `X`  +  `II`. The number twenty seven is written as  `XXVII`, which is  `XX`  +  `V`  +  `II`.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not  `IIII`. Instead, the number four is written as  `IV`. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as  `IX`. There are six instances where subtraction is used:
+
+-   `I`  can be placed before  `V`  (5) and  `X`  (10) to make 4 and 9.
+-   `X`  can be placed before  `L`  (50) and  `C`  (100) to make 40 and 90.
+-   `C`  can be placed before  `D`  (500) and  `M`  (1000) to make 400 and 900.
+
+Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.
+**Solution 1 **: Similar to the problem 11, we list all the possibilities and read the `s` from left to right. 
+```
+class Solution:
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        T = {"M":1000, "MM":2000, "MMM":3000,"C":100, "CC":200, "CCC":300, "CD":400, "D":500, "DC":600, "DCC":700,
+        "DCCC":800, "CM":900,"X":10, "XX":20, "XXX":30, "XL":40, "L":50, "LX":60, "LXX":70, "LXXX":80, "XC":90,"I":1,
+        "II":2, "III":3, "IV":4, "V":5, "VI":6, "VII":7, "VIII":8, "IX":9}
+        res = 0
+        i = 0
+        while i <len(s):
+            j = min(i+4,len(s))
+            t = s[i:j]
+            while t not in T.keys():
+                j -= 1
+                t = s[i:j]
+            res += T[t]
+            i += j-i
+        return res
+```
+**Solution 2**(inspired by [2017111303](https://leetcode.com/problems/roman-to-integer/discuss/183552/very-easy-python-solution(with-extra-Chinese-explanation))): Let's observe how the Roman number is calculated.   
+```
+III = I+I+I = 1+1+1 = 3   
+LXX = L+X+X = 50+10+10 = 70
+CM = M-C = 100-10 = 90
+IV = V-I = 5-1 = 4
+```  
+ For normal numbers, we can just add the value of them. Exceptionally, for `4` and `9` we should do subtraction. The feature of `4` and `9` is that the previous letter is smaller than the latter one. In this way, we can read the letter of `s` one by one.
+ ```
+class Solution:
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        T = {"I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
+        res = 0
+        for i in range(len(s)-1):
+            temp = T[s[i]]*[1,-1][(T[s[i]]<T[s[i+1]])]
+            res += temp
+        res += T[s[-1]]
+        return res
+```
+
 Time complexity: **O(|J|\*|S|)**  
 The operation ```a in b``` has different time complexity in **list** and **set**, see here：https://wiki.python.org/moin/TimeComplexity  
 ```a in b``` in list: O(n)  
