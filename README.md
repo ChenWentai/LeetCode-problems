@@ -745,3 +745,58 @@ class Solution:
         return res
 ```
 
+## 14. 3Sum (Medium)
+[原题链接]([https://leetcode.com/problems/3sum/](https://leetcode.com/problems/3sum/))
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+**Note**:
+The solution set must not contain duplicate triplets.
+**Example:**
+>Given array nums = [-1, 0, 1, 2, -1, -4],
+A solution set is:
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]   
+
+**思路**  
+`a+b+c=0` 等价于`a+b=-c`, 因此原问题转化为找到两个数`a`和`b`，使得`a+b=-c`，这样就从*3Sum*的问题转化到*2Sum*
+**解法**
+```
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        def twoSum(nums, c=0):
+            '''
+            从数组nums中找到所有的组合(a, b),使得 a + b = c.
+            返回值：所有的和为-c的组合[[a1, b1, -c],[a2, b2, -c],..., [an, bn, -c]]
+            '''
+            result = []
+            i = 0
+            j = len(nums)-1
+            while i < j:
+                s = nums[i]+nums[j]
+                if s == c:
+                    if [nums[i], nums[j], -c] not in result: #结果不能包含重复值
+                        result.append([nums[i], nums[j], -c])
+                    i += 1
+                    j -= 1
+                elif s >c:
+                    j -= 1
+                else:
+                    i += 1
+            return result
+        
+        result = []
+        if len(nums) < 3:
+            return result
+        nums = sorted(nums) # 首先将nums排序
+        for i in range(len(nums)):
+            if nums[i]>0: #nums[i]即为c. 由于数组从小到大排序，当c>0时三者之和不可能为0
+                break
+            if i >= 1 and nums[i] == nums[i-1]:#跳过重复的c
+                continue
+            r = twoSum(nums[i+1:], -nums[i])
+            result += r
+           
+        return result
+        
+```
